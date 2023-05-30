@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from utils.user import Validation, Registration
+from utils.register import Validation, Registration
 
 app = Flask(__name__)
 
@@ -9,7 +9,11 @@ def register():
     data = request.get_json()
 
     registration = Registration(
-        data["userName"], data["email"], data["password1"], data["password2"]
+        data["userName"],
+        data["fullName"],
+        data["email"],
+        data["password1"],
+        data["password2"],
     )
     validation = Validation(registration)
 

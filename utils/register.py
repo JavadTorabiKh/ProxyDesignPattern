@@ -2,10 +2,7 @@ from abc import ABCMeta, abstractmethod
 import pymongo
 import jwt
 import re
-
-username_pattern = r"^[a-zA-Z0-9_-]{4,16}$"
-email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-password_pattern = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
+from . import Constants
 
 
 # Subject
@@ -17,8 +14,9 @@ class User(metaclass=ABCMeta):
 
 # RealSubject
 class Registration(User):
-    def __init__(self, userName, email, password1, password2):
+    def __init__(self, userName, fullName, email, password1, password2):
         self.userName = userName
+        self.fullName = fullName
         self.email = email
         self.password1 = password1
         self.password2 = password2
@@ -35,6 +33,7 @@ class Registration(User):
 
         userdict = {
             "userName": self.userName,
+            "fullName": self.fullName,
             "email": self.email,
             "password": self.password1,
             "token": token,
@@ -42,7 +41,7 @@ class Registration(User):
 
         if usercol.find_one({"email": self.email}):
             return False
-        x = usercol.insert_one(userdict)
+        usercol.insert_one(userdict)
         return True
 
 
@@ -52,31 +51,36 @@ class Validation(User):
         self.registration = registration
 
     @property
-    def check_name(self):
-        if self.registration.userName != "admin" and re.match(
-            username_pattern, self.registration.userName
-        ):
+    def check_username(self):
+        if re.match(Constants.username_pattern, self.registration.userName):
+            return True
+        return False
+
+    @property
+    def check_fullname(self):
+        if re.match(Constants.fullName_pattern, self.registration.fullName):
             return True
         return False
 
     @property
     def check_email(self):
-        if re.match(email_pattern, self.registration.email):
+        if re.match(Constants.email_pattern, self.registration.email):
             return True
         return False
 
     @property
     def check_password(self):
-        if re.match(password_pattern, self.registration.password1):
+        if re.match(Constants.password_pattern, self.registration.password1):
             return True
         return False
 
     def do_register(self):
-        if (
-            self.check_name
+        checking = (
+            self.check_username
             and self.check_email
             and self.check_password
             and self.registration.password1 == self.registration.password2
-        ):
+        )
+        if checking:
             return self.registration.do_register()
         return False
