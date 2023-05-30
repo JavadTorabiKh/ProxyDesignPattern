@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 import pymongo
+import jwt
 import re
 
 username_pattern = r"^[a-zA-Z0-9_-]{4,16}$"
@@ -22,23 +23,27 @@ class Registration(User):
         self.password1 = password1
         self.password2 = password2
         self.mongo = pymongo.MongoClient("mongodb://127.0.0.1:27017/")
-        
 
     def do_register(self):
         userdb = self.mongo["usersDB"]
         usercol = userdb["usersValid"]
 
+        # create JWT
+        payload = {"username": self.userName, "email": self.email}
+        secret_key = self.password1
+        token = jwt.encode(payload, secret_key, algorithm="HS256")
+
         userdict = {
             "userName": self.userName,
             "email": self.email,
             "password": self.password1,
+            "token": token,
         }
+
         if usercol.find_one({"email": self.email}):
             return False
         x = usercol.insert_one(userdict)
         return True
-    
-
 
 
 # Proxy
