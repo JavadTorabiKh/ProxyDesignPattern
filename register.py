@@ -18,8 +18,18 @@ def register():
     validation = Validation(registration)
 
     if validation.do_register():
-        return jsonify({"message": "Your validation was successful"})
-    return jsonify({"message": "Your validation was unsuccessful"})
+        if registration.success_message:
+            return jsonify(
+                [
+                    registration.email_message,
+                    registration.username_message,
+                    registration.success_message,
+                ]
+            )
+    return jsonify(
+        registration.email_message,
+        registration.username_message,
+    )
 
 
 if __name__ == "__main__":

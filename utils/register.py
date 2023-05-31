@@ -21,27 +21,54 @@ class Registration(User):
         self.password1 = password1
         self.password2 = password2
         self.mongo = pymongo.MongoClient("mongodb://127.0.0.1:27017/")
+        self.email_message = None
+        self.username_message = None
+        self.success_message = None
+
+    @property
+    def jwtFunc(self):
+        payload = {"username": self.userName, "email": self.email}
+        secret_key = self.password1
+        self.token = jwt.encode(payload, secret_key, algorithm="HS256")
+
+    def checkData(self):
+        Email = self.usercol.find_one({"email": self.email})
+        userName = self.usercol.find_one({"userName": self.userName})
+
+        if Email:
+            self.email_message = Constants.EmailNOTValid
+
+        else:
+            self.email_message = Constants.EmailValid
+
+        if userName:
+            self.username_message = Constants.UserNOTValid
+
+        else:
+            self.username_message = Constants.UserValid
 
     def do_register(self):
         userdb = self.mongo["usersDB"]
-        usercol = userdb["usersValid"]
+        self.usercol = userdb["usersValid"]
 
-        # create JWT
-        payload = {"username": self.userName, "email": self.email}
-        secret_key = self.password1
-        token = jwt.encode(payload, secret_key, algorithm="HS256")
+        self.jwtFunc
 
         userdict = {
             "userName": self.userName,
             "fullName": self.fullName,
             "email": self.email,
             "password": self.password1,
-            "token": token,
+            "token": self.token,
         }
 
-        if usercol.find_one({"email": self.email}):
-            return False
-        usercol.insert_one(userdict)
+        self.checkData()
+
+        if (
+            self.email_message == Constants.EmailValid
+            and self.username_message == Constants.UserValid
+        ):
+            self.usercol.insert_one(userdict)
+            self.success_message = Constants.success
         return True
 
 
