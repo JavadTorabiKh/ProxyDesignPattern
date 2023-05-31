@@ -26,10 +26,21 @@ def register():
                     registration.success_message,
                 ]
             )
-    return jsonify(
-        registration.email_message,
-        registration.username_message,
-    )
+        return jsonify(
+            [
+                registration.email_message,
+                registration.username_message,
+            ]
+        )
+    else:
+        listErr =[
+            validation.username_synErr,
+            validation.fullname_synErr,
+            validation.email_synErr,
+            validation.pass_synErr,
+            validation.confirmPass_synErr,
+        ]
+        return jsonify(list(filter(None, listErr)))
 
 
 if __name__ == "__main__":

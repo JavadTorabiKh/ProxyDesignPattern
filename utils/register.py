@@ -31,19 +31,17 @@ class Registration(User):
         secret_key = self.password1
         self.token = jwt.encode(payload, secret_key, algorithm="HS256")
 
+    @property
     def checkData(self):
         Email = self.usercol.find_one({"email": self.email})
         userName = self.usercol.find_one({"userName": self.userName})
 
         if Email:
             self.email_message = Constants.EmailNOTValid
-
         else:
             self.email_message = Constants.EmailValid
-
         if userName:
             self.username_message = Constants.UserNOTValid
-
         else:
             self.username_message = Constants.UserValid
 
@@ -61,7 +59,7 @@ class Registration(User):
             "token": self.token,
         }
 
-        self.checkData()
+        self.checkData
 
         if (
             self.email_message == Constants.EmailValid
@@ -76,37 +74,48 @@ class Registration(User):
 class Validation(User):
     def __init__(self, registration):
         self.registration = registration
+        self.email_synErr = None
+        self.fullname_synErr = None
+        self.username_synErr = None
+        self.pass_synErr = None
+        self.confirmPass_synErr = None
 
     @property
     def check_username(self):
         if re.match(Constants.username_pattern, self.registration.userName):
             return True
-        return False
+        self.username_synErr = Constants.checkUsernameMessage
 
     @property
     def check_fullname(self):
         if re.match(Constants.fullName_pattern, self.registration.fullName):
             return True
-        return False
+        self.fullname_synErr = Constants.checkFullnameMessage
 
     @property
     def check_email(self):
         if re.match(Constants.email_pattern, self.registration.email):
             return True
-        return False
+        self.email_synErr = Constants.checkEmailMessage
 
     @property
     def check_password(self):
         if re.match(Constants.password_pattern, self.registration.password1):
             return True
-        return False
+        self.pass_synErr = Constants.checkPasswordMessage
+        
+    @property
+    def check_confirmpassword(self):
+        if self.registration.password1 == self.registration.password2:
+            return True
+        self.confirmPass_synErr = Constants.checkConfirmpassMessage
 
     def do_register(self):
         checking = (
             self.check_username
             and self.check_email
             and self.check_password
-            and self.registration.password1 == self.registration.password2
+            and self.check_confirmpassword
         )
         if checking:
             return self.registration.do_register()
