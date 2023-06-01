@@ -9,7 +9,7 @@ UserValid = {"messageUserValid": "Username is Valid"}
 UserNOTValid = {"messageUserNOTValid": "This is a duplicate Username"}
 success = {"messageSuccess": "Your registeration was Success"}
 
-checkUsernameMessage = {"checkUsernameMessage": "Your Email is invalid"}
+checkUsernameMessage = {"checkUsernameMessage": "Your Username is invalid"}
 checkFullnameMessage = {"checkFullnameMessage": "Your Email is invalid"}
 checkEmailMessage = {"checkEmailMessage": "Your Email is invalid"}
 checkPasswordMessage = {"checkPasswordMessage": "Your Password is invalid"}

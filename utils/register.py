@@ -25,7 +25,6 @@ class Registration(User):
         self.username_message = None
         self.success_message = None
 
-    @property
     def jwtFunc(self):
         payload = {"username": self.userName, "email": self.email}
         secret_key = self.password1
@@ -49,7 +48,7 @@ class Registration(User):
         userdb = self.mongo["usersDB"]
         self.usercol = userdb["usersValid"]
 
-        self.jwtFunc
+        self.jwtFunc()
 
         userdict = {
             "userName": self.userName,
