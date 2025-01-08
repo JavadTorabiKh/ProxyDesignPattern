@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from utils.register import Validation, Registration
 
+
 app = Flask(__name__)
 
 
@@ -33,7 +34,7 @@ def register():
             ]
         )
     else:
-        listErr =[
+        listErr = [
             validation.username_synErr,
             validation.fullname_synErr,
             validation.email_synErr,
