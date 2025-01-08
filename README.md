@@ -2,17 +2,16 @@
   <strong>URL:</strong><br>...       POST http://localhost:5000/api/v1/register
   <br></div>
 
-
-
-
+```bash
 body is :
-transaction_body={
+{
     "userName": "userName",
     "fullName":"fullName",
     "email": "email@gmaile.com",
     "password1": "password1",
     "password2":"password2"
 }
+echo "سلام، این یک شل ساده است."
 
 
-echo "$transaction_body"
+
