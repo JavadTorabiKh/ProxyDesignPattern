@@ -15,7 +15,7 @@
         "password1": "password1",
         "password2":"password2"
     }
-    echo "سلام، این یک شل ساده است."
+    echo "OUTPUT..."
   <br></div>
 
 
