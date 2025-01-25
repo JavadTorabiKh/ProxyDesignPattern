@@ -71,5 +71,11 @@ Start the application and follow the prompts to register a user. The Proxy will 
 ## 📬 Contact
 - Have questions or suggestions? Feel free to reach out at j.2528840@gmail.com.
 
+## 🎓 Learn More
+Want to dive deeper into design patterns? Check out these resources:
 
+- Head First Design Patterns by Eric Freeman
+- Design Patterns: Elements of Reusable Object-Oriented Software by Erich Gamma et al.
+
+## Happy coding! 🚀
 
