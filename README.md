@@ -51,5 +51,5 @@ Open your terminal and run:
   # Install dependencies (if applicable)
   pip install -r requirements.txt
 
-Step 2: Run the Application
+### Step 2: Run the Application
 Start the application and follow the prompts to register a user. The Proxy will seamlessly manage the registration process for you.
