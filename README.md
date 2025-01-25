@@ -60,3 +60,13 @@ Start the application and follow the prompts to register a user. The Proxy will 
   proxy = UserRegistrationProxy()
   proxy.register_user("username", "password")
   ```
+
+
+## 🤝 Contributing
+We welcome contributions! Please fork the repository and submit a pull request with your enhancements or fixes.
+
+## 📄 License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## 📬 Contact
+Have questions or suggestions? Feel free to reach out at your.email@example.com.
