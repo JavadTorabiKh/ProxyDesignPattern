@@ -13,6 +13,7 @@ success = {"messageSuccess": "Your registeration was Success"}
 
 checkUsernameMessage = {"checkUsernameMessage": "Your Username is invalid"}
 checkFullnameMessage = {"checkFullnameMessage": "Your Email is invalid"}
+
 checkEmailMessage = {"checkEmailMessage": "Your Email is invalid"}
 checkPasswordMessage = {"checkPasswordMessage": "Your Password is invalid"}
 checkConfirmpassMessage = {
