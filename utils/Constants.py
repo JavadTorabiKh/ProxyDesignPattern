@@ -16,5 +16,6 @@ checkFullnameMessage = {"checkFullnameMessage": "Your Email is invalid"}
 
 checkEmailMessage = {"checkEmailMessage": "Your Email is invalid"}
 checkPasswordMessage = {"checkPasswordMessage": "Your Password is invalid"}
+
 checkConfirmpassMessage = {
     "checkConfirmpassMessage": "Confirm password does not match"}
