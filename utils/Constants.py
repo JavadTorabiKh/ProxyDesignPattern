@@ -8,6 +8,7 @@ EmailNOTValid = {"messageEmailNOTValid": "This is a duplicate email"}
 
 UserValid = {"messageUserValid": "Username is Valid"}
 UserNOTValid = {"messageUserNOTValid": "This is a duplicate Username"}
+
 success = {"messageSuccess": "Your registeration was Success"}
 
 checkUsernameMessage = {"checkUsernameMessage": "Your Username is invalid"}
