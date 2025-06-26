@@ -4,6 +4,8 @@
 
 Welcome to the User Registration System! In this project, we explore the **Proxy Design Pattern**, a powerful structural pattern that acts as an intermediary for another object. This pattern is not just a theoretical concept; it has practical applications that can enhance your software architecture, improve security, and optimize performance.
 
+---
+
 ## 📜 What is the Proxy Design Pattern?
 
 The Proxy Pattern provides a surrogate or placeholder for another object to control access to it. It consists of three main components:
