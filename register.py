@@ -4,6 +4,7 @@ from utils.register import Validation, Registration
 # create flask app
 app = Flask(__name__)
 
+
 # registeration
 @app.route("/api/v1/register", methods=["POST"])
 def register():
